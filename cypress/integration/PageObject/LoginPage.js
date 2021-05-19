@@ -1,7 +1,7 @@
 class LoginPage{
     visit() {
-        //cy.visit("http://login.bamboobox.in/#/")
-        cy.visit("https://accounts.google.com/")
+        cy.visit("http://login.bamboobox.in/#/")
+        
     }
 
     FillEmail(emailValue) {

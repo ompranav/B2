@@ -1,0 +1,12 @@
+{
+  "name": "bamboobox",
+  "version": "1.0.0",
+  "description": "this package contains test suite ",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Om Pranav",
+  "license": "ISC"
+}

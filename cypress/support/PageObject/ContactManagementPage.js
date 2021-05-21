@@ -9,7 +9,7 @@ class ContactManagementPage {
     }
 
     FillCompanyName(CompanyNameValue) {
-        cy.get('.rgt-cell-companyWebsite > input').type(CompanyNameValue)
+        cy.get('.rgt-cell-companyName > .rgt-cell-inner > .rgt-cell-editor-inner > .rgt-cell-editor-input').type(CompanyNameValue)
     }
 
     FillFirstName(FitrstNameValue) {

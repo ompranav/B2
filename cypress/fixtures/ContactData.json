@@ -1,0 +1,23 @@
+{
+    "C1" : {
+        "companyName" : "abcd",
+        "websiteName" : "abcd.com",
+        "FirstName"   :  "om ",
+        "LastName"    : "pranav",
+        "OfficialEmail": "om@official.com"
+
+        } ,
+
+        "C2" : {
+            "companyName" : "abcdefghi",
+            "websiteName" : "abcdefghi.com",
+            "FirstName"   :  "om ",
+            "LastName"    : "pranav",
+            "LinkedinURL": "urloflinkedin"
+    
+            }     
+
+
+
+    
+}

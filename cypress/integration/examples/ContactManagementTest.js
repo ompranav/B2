@@ -27,7 +27,7 @@ describe('AM Contact tests',function(){
     
     it('AM Contact Creation',() => {
         const CM = new ContactManagementPage();
-        CM.ClickToggle()
+        
         CM.FillCompanyWebsite(this.data.C2.websiteName)
         CM.FillCompanyName(this.data.C2.companyName)
         CM.FillFirstName(this.data.C2.FirstName)

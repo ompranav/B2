@@ -3,75 +3,81 @@ import ContactManagementPage from '../../support/PageObject/ContactManagementPag
 describe('AM Contact tests',function(){
     before('visit website',() =>{
         cy.visit('http://b2prospect.bamboobox.in/')
-        
+        const CM = new ContactManagementPage();
+        CM.ClickToggle()
         cy.fixture('ContactData').then((data)  => {
             this.data=data
         })
+        cy.viewport('macbook-15')
     })
+    
 
-    it('AM Contact Creation',() => {
+    it('New Contact Creation using Email',() => {
         const CM = new ContactManagementPage();
-        CM.ClickToggle()
-        CM.FillCompanyWebsite(this.data.C1.websiteName)
-        CM.FillCompanyName(this.data.C1.companyName)
+        // change value of extra everytime
+        const extra="c12"
+        CM.FillCompanyWebsite(extra + this.data.C1.websiteName)
+        cy.wait(1000)
+        CM.FillCompanyName(extra + this.data.C1.companyName)
+        cy.wait(1000)
         CM.FillFirstName(this.data.C1.FirstName)
         CM.FillLastName(this.data.C1.LastName)
-        CM.FillOfficialEmail(this.data.C1.OfficialEmail)
+        CM.FillOfficialEmail(extra + this.data.C1.OfficialEmail)
+        cy.wait(2000)
         CM.CreateContact()
-        cy.wait(4000)
-        cy.contains('has been added/edited successfully!')
-        cy.contains(this.data.C1.OfficialEmail).should('exist')
-        
+        cy.wait(8000).then(() => {
+            cy.contains(extra + this.data.C1.OfficialEmail).should('exist')
+        })
     })
     
     
-    it('AM Contact Creation',() => {
+    it('New Contact Creation using LinkedIn',() => {
         const CM = new ContactManagementPage();
-        CM.ClickToggle()
-        CM.FillCompanyWebsite(this.data.C2.websiteName)
-        CM.FillCompanyName(this.data.C2.companyName)
+        // change value of extra everytime
+        const extra="d12"
+        CM.FillCompanyWebsite(extra + this.data.C2.websiteName)
+        cy.wait(1000)
+        CM.FillCompanyName(extra + this.data.C2.companyName)
+        cy.wait(1000)
         CM.FillFirstName(this.data.C2.FirstName)
         CM.FillLastName(this.data.C2.LastName)
-        CM.FillLinkedinURL(this.data.C2.LinkedinURL)
+        CM.FillLinkedinURL(extra + this.data.C2.LinkedinURL)
+        cy.wait(2000)
         CM.CreateContact()
-        cy.wait(6000)
-        cy.contains('has been added/edited successfully!')
-        cy.contains(this.data.C2.LinkedinURL).should('exist')
-        
+        cy.wait(8000).then(() => {
+            cy.contains(extra + this.data.C2.LinkedinURL).should('exist')
+        })
     }) 
 
-    it("Doesn't allow Duplicate account creation", () =>{
+    it("Duplicate account creation using same Email", () =>{
         const CM = new ContactManagementPage();
-
-        CM.ClickToggle()
-        CM.FillCompanyWebsite(this.data.C2.websiteName)
-        CM.FillCompanyName(this.data.C2.companyName)
-        CM.FillFirstName(this.data.C2.FirstName)
-        CM.FillLastName(this.data.C2.LastName)
-        CM.FillLinkedinURL(this.data.C2.LinkedinURL)
-        CM.CreateContact()
-
-
-        
-        cy.on('window:alert', (str) => {
-            expect(str).to.equal(`Entered Contact is already present in the grid.`)
-          })
+        // change value of extra everytime
+        const extra="c12"
+        CM.FillCompanyWebsite(extra + this.data.C1.websiteName)
+        cy.wait(1000)
+        CM.FillCompanyName(extra + this.data.C1.companyName)
+        cy.wait(1000)
+        CM.FillFirstName(this.data.C1.FirstName)
+        CM.FillLastName(this.data.C1.LastName)
+        CM.FillOfficialEmail(extra + this.data.C1.OfficialEmail)
+        cy.wait(2000)
         CM.ClearInput()
     })
     it('Mandatory Fields Error Message Displayed Correctly',()=>{
         const CM = new ContactManagementPage();
-
-        CM.ClickToggle()
-        CM.FillCompanyWebsite(this.data.C2.websiteName)
-        CM.FillCompanyName(this.data.C2.companyName)
-        CM.FillFirstName(this.data.C2.FirstName)
-    
-        CM.CreateContact()
-
-
-        
+        // change value of extra everytime
+        const extra="c12"
+        CM.FillCompanyWebsite(extra + this.data.C1.websiteName)
+        cy.wait(1000)
+        CM.FillCompanyName(extra + this.data.C1.companyName)
+        cy.wait(1000)
+        CM.FillFirstName(this.data.C1.FirstName)
+        CM.FillLastName(this.data.C1.LastName)
+        CM.FillOfficialEmail(extra + this.data.C1.OfficialEmail)
+        cy.wait(2000)
         cy.on('window:alert', (str) => {
-            expect(str).to.equal(`No Mandatory fields passed`)
+            if(str=="No Mandatory fields passed")
+                expect(str).to.equal(`No Mandatory fields passed`)
           })
         CM.ClearInput()
     })
